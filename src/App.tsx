@@ -1,14 +1,6 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import AdminDashboard from "./components/AdminDashboard";
-import Debtors from "./components/Debtors";
-import Employees from "./components/Employees";
-import Home from "./components/Home";
-import Lessons from "./components/Lessons";
-import StudentSchedule from "./components/StudentSchedule";
-import TeacherCourses from "./components/TeacherCourses";
-import Tasks from "./components/Tasks";
 import LoginPage from "./components/LoginPage";
 import ErrorPage from "./components/ErrorPage";
 import { RootState } from "./store/store";
@@ -50,7 +42,7 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-      {token && role === "admin" && (
+      {token && role === "guest" && (
         <>
           <Route
             path="/"
@@ -84,6 +76,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<ErrorPage />} />
         </>
       )}
 
@@ -93,7 +86,7 @@ function App() {
             path="/"
             element={
               <ProtectedRoute isAuthentication={!!token}>
-                <Home />
+                <TeacherHome/>
               </ProtectedRoute>
             }
           />
@@ -113,6 +106,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<ErrorPage />} />
         </>
       )}
 
@@ -122,7 +116,7 @@ function App() {
             path="/"
             element={
               <ProtectedRoute isAuthentication={!!token}>
-                <Home />
+                <StudentHome />
               </ProtectedRoute>
             }
           />
@@ -142,6 +136,7 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="*" element={<ErrorPage />} />
         </>
       )}
       <Route path="*" element={<ErrorPage />} />
@@ -149,4 +144,34 @@ function App() {
   );
 }
 
+function Tasks(): JSX.Element {
+  return <div>Tasks</div>;
+}
+function Home(): JSX.Element {
+  return <div > Welcome Guest page</div>;
+}
+function TeacherHome(): JSX.Element {
+  return <div>welcome Teacher Page </div>;
+}
+function StudentHome(): JSX.Element {
+  return <div>Welcome student Page</div>;
+}
+function Lessons(): JSX.Element {
+  return <div>Lessons</div>;
+}
+function TeacherCourses(): JSX.Element {
+  return <div>TeacherCourses</div>;
+}
+function StudentSchedule(): JSX.Element {
+  return <div>StudentSchedule</div>;
+}
+function AdminDashboard(): JSX.Element {
+  return <div>AdminDashboard</div>;
+}
+function Employees(): JSX.Element {
+  return <div>Employees</div>;
+}
+function Debtors(): JSX.Element {
+  return <div>Debtors</div>;
+}
 export default App;
